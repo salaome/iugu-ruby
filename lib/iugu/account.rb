@@ -7,11 +7,10 @@ module Iugu
     #
     # @param [Hash] attributes the values to create an account
     # @option attributes [String] :name The name of an account
-    # @option attributes [Integer] :commission_percent The commission_percent
-    #   of an account
+    # @option attributes [Integer] :commission_percent The commission_percent of an account
 
 
-    def self.create(attributes)
+    def self.create(attributes = {})
       Iugu::Factory.create_from_response(
         object_type,
         APIRequest.request(
