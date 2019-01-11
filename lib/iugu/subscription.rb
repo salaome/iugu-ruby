@@ -51,9 +51,7 @@ module Iugu
     end
 
     def all
-      copy Iugu::Factory.create_from_response(self.class.object_type, APIRequest.request("GET", self.class.url(self.id)))
-      self.errors = nil
-      true
+      Iugu::Factory.create_from_response(self.class.object_type, APIRequest.request("GET", self.class.url))
     rescue Iugu::RequestWithErrors => ex
       self.errors = ex.errors
       false
