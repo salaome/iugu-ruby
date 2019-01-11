@@ -50,6 +50,15 @@ module Iugu
       false
     end
 
+    def all
+      copy Iugu::Factory.create_from_response(self.class.object_type, APIRequest.request("GET", self.class.url(self.id)))
+      self.errors = nil
+      true
+    rescue Iugu::RequestWithErrors => ex
+      self.errors = ex.errors
+      false
+    end
+
     def customer
       return false unless @attributes['customer_id']
       Customer.fetch @attributes['customer_id']
