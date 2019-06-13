@@ -50,8 +50,8 @@ module Iugu
       false
     end
 
-    def all
-      Iugu::Factory.create_from_response(self.class.object_type, APIRequest.request("GET", self.class.url))
+    def all(data = {})
+      Iugu::Factory.create_from_response(self.class.object_type, APIRequest.request("GET", self.class.url, data))
     rescue Iugu::RequestWithErrors => ex
       self.errors = ex.errors
       false
