@@ -17,5 +17,12 @@ module Iugu
       return false unless @attributes['default_payment_method_id']
       PaymentMethod.fetch({ id: @attributes['default_payment_method_id'], customer_id: self.id })
     end
+
+    def all(data = {})
+      Iugu::Factory.create_from_response(self.class.object_type, APIRequest.request("GET", self.class.url, data))
+    rescue Iugu::RequestWithErrors => ex
+      self.errors = ex.errors
+      false
+    end
   end
 end
